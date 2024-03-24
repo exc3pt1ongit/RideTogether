@@ -1,0 +1,6 @@
+@RideTogether.API_HostAddress = http://localhost:5035
+
+GET {{RideTogether.API_HostAddress}}/
+Accept: application/json
+
+###
