@@ -10,6 +10,5 @@ public interface IDriverRepository
     Task<Driver> CreateAsync(Driver driver);
     Task<Driver> UpdateAsync(Driver driver);
     Task DeleteAsync(int id);
-
     List<Driver> FindDataByFilter(List<Driver>? entities, DriverFilterDto? filter);
 }
