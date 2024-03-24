@@ -24,4 +24,8 @@
       <ProjectReference Include="..\RideTogether.Models\RideTogether.Models.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="DataObjects\" />
+    </ItemGroup>
+
 </Project>

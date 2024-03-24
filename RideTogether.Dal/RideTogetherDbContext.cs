@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RideTogether.Dal.Person;
-using RideTogether.Dal.Route;
-using RideTogether.Dal.Trip;
+using RideTogether.Dal.DataObjects.Person;
+using RideTogether.Dal.DataObjects.Route;
+using RideTogether.Dal.DataObjects.Trip;
 
 namespace RideTogether.Dal;
 

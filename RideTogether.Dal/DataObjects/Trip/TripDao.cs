@@ -1,10 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
-using RideTogether.Dal.Person;
-using RideTogether.Dal.Route;
 
-namespace RideTogether.Dal.Trip;
+namespace RideTogether.Dal.DataObjects.Trip;
 
 [Table("Trips")]
 public class TripDao

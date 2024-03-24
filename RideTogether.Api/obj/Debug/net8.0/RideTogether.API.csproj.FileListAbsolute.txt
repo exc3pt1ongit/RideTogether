@@ -222,3 +222,4 @@ D:\development\coursework\RideTogether\RideTogether.Api\obj\Debug\net8.0\refint\
 D:\development\coursework\RideTogether\RideTogether.Api\obj\Debug\net8.0\RideTogether.Api.pdb
 D:\development\coursework\RideTogether\RideTogether.Api\obj\Debug\net8.0\RideTogether.Api.genruntimeconfig.cache
 D:\development\coursework\RideTogether\RideTogether.Api\obj\Debug\net8.0\ref\RideTogether.Api.dll
+D:\development\coursework\RideTogether\RideTogether.Api\obj\Debug\net8.0\RideTogether.Api.sourcelink.json

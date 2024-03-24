@@ -1,4 +1,7 @@
-﻿namespace RideTogether.Models.Person.Interfaces;
+﻿using RideTogether.Dal.Filters;
+using RideTogether.Models.Person;
+
+namespace RideTogether.Dal.Repositories.Interfaces;
 
 public interface IDriverOrchestrator
 {
@@ -7,4 +10,5 @@ public interface IDriverOrchestrator
     Task<Driver> CreateAsync(Driver driver);
     Task<Driver> UpdateAsync(int id, Driver driverToUpdate);
     Task<Driver> DeleteAsync(int id);
+    List<Driver> FindDataByFilter(List<Driver>? entities, DriverFilterDto? filter);
 }

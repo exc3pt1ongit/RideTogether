@@ -28,3 +28,6 @@ D:\development\coursework\RideTogether\RideTogether.Orchestrators\obj\Debug\net8
 D:\development\coursework\RideTogether\RideTogether.Orchestrators\obj\Debug\net8.0\refint\RideTogether.Orchestrators.dll
 D:\development\coursework\RideTogether\RideTogether.Orchestrators\obj\Debug\net8.0\RideTogether.Orchestrators.pdb
 D:\development\coursework\RideTogether\RideTogether.Orchestrators\obj\Debug\net8.0\ref\RideTogether.Orchestrators.dll
+D:\development\coursework\RideTogether\RideTogether.Orchestrators\bin\Debug\net8.0\RideTogether.Dal.dll
+D:\development\coursework\RideTogether\RideTogether.Orchestrators\bin\Debug\net8.0\RideTogether.Dal.pdb
+D:\development\coursework\RideTogether\RideTogether.Orchestrators\obj\Debug\net8.0\RideTogether.Orchestrators.sourcelink.json

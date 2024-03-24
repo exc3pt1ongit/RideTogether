@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RideTogether.Dal;
 using RideTogether.Dal.Repositories;
-using RideTogether.Models.Person.Interfaces;
+using RideTogether.Dal.Repositories.Interfaces;
 using RideTogether.Models.PersonModel.Interfaces;
 using RideTogether.Models.TripModel.Interfaces;
 using RideTogether.Orchestrators.Person;

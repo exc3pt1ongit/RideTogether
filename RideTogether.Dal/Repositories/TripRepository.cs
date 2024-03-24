@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using RideTogether.Dal.Trip;
+using RideTogether.Dal.DataObjects.Trip;
 using RideTogether.Models.TripModel.Interfaces;
 
 namespace RideTogether.Dal.Repositories;

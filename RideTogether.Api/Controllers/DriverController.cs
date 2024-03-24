@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using RideTogether.Dal.Filters;
+using RideTogether.Dal.Repositories.Interfaces;
 using RideTogether.Models.Person;
-using RideTogether.Models.Person.Interfaces;
 using RideTogether.Orchestrators.Contracts.Driver;
 
 namespace RideTogether.Api.Controllers;
@@ -20,15 +21,10 @@ public class DriverController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Driver>>> Get(string? minAgeFilter = null)
+    public async Task<ActionResult<IEnumerable<Driver>>> Get([FromQuery] DriverFilterDto? filter)
     {
         var drivers = await _driverOrchestrator.GetAllAsync();
-        
-        var minAgeParsed = sbyte.TryParse(minAgeFilter, out var minAgeValue);
-        if (minAgeFilter != null && minAgeParsed)
-            drivers = drivers.Where(d => d.Age >= minAgeValue).ToList();
-        
-        return Ok(drivers);
+        return Ok(_driverOrchestrator.FindDataByFilter(drivers, filter));
     }
     
     [HttpGet("{id:int}")]

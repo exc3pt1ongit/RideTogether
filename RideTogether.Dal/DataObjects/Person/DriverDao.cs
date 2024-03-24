@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
-using RideTogether.Dal.Trip;
+using RideTogether.Dal.DataObjects.Trip;
 
-namespace RideTogether.Dal.Person;
+namespace RideTogether.Dal.DataObjects.Person;
 
 [Table("Drivers")]
 public class DriverDao

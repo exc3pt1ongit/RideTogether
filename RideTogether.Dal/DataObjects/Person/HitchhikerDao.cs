@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RideTogether.Dal.Person;
+namespace RideTogether.Dal.DataObjects.Person;
 
 [Table("Hitchhikers")]
 public class HitchhikerDao

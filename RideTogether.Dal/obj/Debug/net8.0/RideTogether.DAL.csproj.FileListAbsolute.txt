@@ -32,3 +32,4 @@ D:\development\coursework\RideTogether\RideTogether.Dal\obj\Debug\net8.0\refint\
 D:\development\coursework\RideTogether\RideTogether.Dal\obj\Debug\net8.0\RideTogether.Dal.pdb
 D:\development\coursework\RideTogether\RideTogether.Dal\obj\Debug\net8.0\RideTogether.Dal.genruntimeconfig.cache
 D:\development\coursework\RideTogether\RideTogether.Dal\obj\Debug\net8.0\ref\RideTogether.Dal.dll
+D:\development\coursework\RideTogether\RideTogether.Dal\obj\Debug\net8.0\RideTogether.Dal.sourcelink.json

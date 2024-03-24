@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
-using RideTogether.Dal.City;
+using RideTogether.Dal.DataObjects.City;
 
-namespace RideTogether.Dal.Route;
+namespace RideTogether.Dal.DataObjects.Route;
 
 [Table("Routes")]
 public class RouteDao

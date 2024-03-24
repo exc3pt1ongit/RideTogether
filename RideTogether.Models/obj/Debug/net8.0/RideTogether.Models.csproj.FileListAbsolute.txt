@@ -20,3 +20,4 @@ D:\development\coursework\RideTogether\RideTogether.Models\obj\Debug\net8.0\Ride
 D:\development\coursework\RideTogether\RideTogether.Models\obj\Debug\net8.0\refint\RideTogether.Models.dll
 D:\development\coursework\RideTogether\RideTogether.Models\obj\Debug\net8.0\RideTogether.Models.pdb
 D:\development\coursework\RideTogether\RideTogether.Models\obj\Debug\net8.0\ref\RideTogether.Models.dll
+D:\development\coursework\RideTogether\RideTogether.Models\obj\Debug\net8.0\RideTogether.Models.sourcelink.json

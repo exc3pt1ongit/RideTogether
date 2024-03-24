@@ -279,6 +279,9 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
+              "D:\\development\\coursework\\RideTogether\\RideTogether.Dal\\RideTogether.Dal.csproj": {
+                "projectPath": "D:\\development\\coursework\\RideTogether\\RideTogether.Dal\\RideTogether.Dal.csproj"
+              },
               "D:\\development\\coursework\\RideTogether\\RideTogether.Models\\RideTogether.Models.csproj": {
                 "projectPath": "D:\\development\\coursework\\RideTogether\\RideTogether.Models\\RideTogether.Models.csproj"
               }

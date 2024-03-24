@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
+using RideTogether.Dal.Filters;
+using RideTogether.Dal.Repositories.Interfaces;
 using RideTogether.Models.Person;
-using RideTogether.Models.Person.Interfaces;
 
 namespace RideTogether.Orchestrators.Person;
 
@@ -45,5 +46,10 @@ public class DriverOrchestrator : IDriverOrchestrator
         var driver = await GetByIdAsync(id);
         await _driverRepository.DeleteAsync(id);
         return driver;
+    }
+
+    public List<Driver> FindDataByFilter(List<Driver>? entities, DriverFilterDto? filter)
+    {
+        return _driverRepository.FindDataByFilter(entities, filter);
     }
 }

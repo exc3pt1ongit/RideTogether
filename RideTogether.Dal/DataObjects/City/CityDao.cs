@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 
-namespace RideTogether.Dal.City;
+namespace RideTogether.Dal.DataObjects.City;
 
 [Table("Cities")]
 public class CityDao

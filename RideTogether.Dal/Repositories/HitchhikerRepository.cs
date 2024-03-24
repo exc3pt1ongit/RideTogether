@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using RideTogether.Dal.Person;
+using RideTogether.Dal.DataObjects.Person;
 using RideTogether.Models.PersonModel;
 using RideTogether.Models.PersonModel.Interfaces;
 

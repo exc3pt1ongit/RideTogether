@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using RideTogether.Dal.Person;
+using RideTogether.Dal.DataObjects.Person;
+using RideTogether.Dal.Filters;
+using RideTogether.Dal.Repositories.Interfaces;
 using RideTogether.Models.Person;
-using RideTogether.Models.Person.Interfaces;
 
 namespace RideTogether.Dal.Repositories;
 
@@ -15,6 +16,28 @@ public class DriverRepository : IDriverRepository
     {
         _dbContext = dbContext;
         _mapper = mapper;
+    }
+
+    public List<Driver> FindDataByFilter(List<Driver>? entities, DriverFilterDto? filter)
+    {
+        if (filter is null || entities is null) return _mapper.Map<List<Driver>>(entities);
+
+        if (filter.MinAge.HasValue)
+        {
+            entities = entities.Where(e => e.Age >= filter.MinAge.Value).ToList();
+        }
+
+        if (filter.MaxAge.HasValue)
+        {
+            entities = entities.Where(e => e.Age <= filter.MaxAge.Value).ToList();
+        }
+
+        if (filter.MinTrips.HasValue)
+        {
+            entities = entities.Where(e => e.Trips.Count >= filter.MinTrips.Value).ToList();
+        }
+
+        return _mapper.Map<List<Driver>>(entities);
     }
     
     public async Task<List<Driver>> GetAllAsync()

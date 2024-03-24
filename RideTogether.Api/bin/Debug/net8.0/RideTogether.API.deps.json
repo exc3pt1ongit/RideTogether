@@ -585,6 +585,7 @@
       "RideTogether.Orchestrators/1.0.0": {
         "dependencies": {
           "AutoMapper": "13.0.1",
+          "RideTogether.Dal": "1.0.0",
           "RideTogether.Models": "1.0.0"
         },
         "runtime": {

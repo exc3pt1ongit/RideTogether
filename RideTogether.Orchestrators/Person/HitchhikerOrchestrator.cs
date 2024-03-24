@@ -1,4 +1,4 @@
-﻿using RideTogether.Models.Person.Interfaces;
+﻿using AutoMapper;
 using RideTogether.Models.PersonModel;
 using RideTogether.Models.PersonModel.Interfaces;
 
@@ -7,10 +7,12 @@ namespace RideTogether.Orchestrators.Person;
 public class HitchhikerOrchestrator : IHitchhikerOrchestrator
 {
     private readonly IHitchhikerRepository _hitchhikerRepository;
-
-    public HitchhikerOrchestrator(IHitchhikerRepository hitchhikerRepository)
+    private readonly IMapper _mapper;
+    
+    public HitchhikerOrchestrator(IHitchhikerRepository hitchhikerRepository, IMapper mapper)
     {
         _hitchhikerRepository = hitchhikerRepository;
+        _mapper = mapper;
     }
     
     public async Task<List<Hitchhiker>> GetAllAsync()
@@ -34,7 +36,7 @@ public class HitchhikerOrchestrator : IHitchhikerOrchestrator
     public async Task<Hitchhiker> UpdateAsync(int id, Hitchhiker hitchhikerToUpdate)
     {
         var hitchhiker = await GetByIdAsync(id);
-        // hitchhiker = _mapper.Map(hitchhikerToUpdate, hitchhiker);
+        hitchhiker = _mapper.Map(hitchhikerToUpdate, hitchhiker);
         return await _hitchhikerRepository.UpdateAsync(hitchhiker);
     }
 
