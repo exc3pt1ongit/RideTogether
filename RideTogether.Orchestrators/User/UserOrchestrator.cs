@@ -29,11 +29,13 @@ public class UserOrchestrator : IUserOrchestrator
         if (isExist)
             throw new InvalidRegistrationException(string.Format(ExceptionMessages.EmailUsed, authModel.Email));
 
-        if (authModel.Nickname == "") authModel.Nickname = null;
+        if (authModel.Nickname == "")
+            authModel.Nickname = null;
 
         var isTaken = await _userRepository.IsNicknameTakenAsync(authModel.Nickname);
 
-        if (isTaken) throw new Exception(string.Format(ExceptionMessages.NicknameTaken, authModel.Nickname));
+        if (isTaken)
+            throw new Exception(string.Format(ExceptionMessages.NicknameTaken, authModel.Nickname));
 
         var userModel = CreateAccount(authModel, (int)BasicRoles.Admin);
 

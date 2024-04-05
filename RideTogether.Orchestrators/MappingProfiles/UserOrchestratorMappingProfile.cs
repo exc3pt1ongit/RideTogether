@@ -7,7 +7,7 @@ using RideTogether.Models.RoleModel;
 using RideTogether.Models.UserModel;
 using RideTogether.Orchestrators.Contracts.User;
 
-namespace RideTogether.Orchestrators.User;
+namespace RideTogether.Orchestrators.MappingProfiles;
 
 public class UserOrchestratorMappingProfile : Profile
 {

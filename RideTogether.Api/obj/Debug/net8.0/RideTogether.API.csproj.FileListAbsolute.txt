@@ -223,3 +223,11 @@ D:\development\coursework\RideTogether\RideTogether.Api\obj\Debug\net8.0\RideTog
 D:\development\coursework\RideTogether\RideTogether.Api\obj\Debug\net8.0\RideTogether.Api.genruntimeconfig.cache
 D:\development\coursework\RideTogether\RideTogether.Api\obj\Debug\net8.0\ref\RideTogether.Api.dll
 D:\development\coursework\RideTogether\RideTogether.Api\obj\Debug\net8.0\RideTogether.Api.sourcelink.json
+D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
