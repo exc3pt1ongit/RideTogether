@@ -1,0 +1,6 @@
+namespace RideTogether.Orchestrators.Validation.Exceptions;
+
+public class NotFoundException : Exception
+{
+    public NotFoundException(string message) : base(message) { }
+}
