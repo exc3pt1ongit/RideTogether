@@ -2,6 +2,7 @@
 using RideTogether.Dal.DataObjects.Person;
 using RideTogether.Dal.DataObjects.Trip;
 using RideTogether.Models.PersonModel;
+using RideTogether.Models.TripModel;
 
 namespace RideTogether.Dal;
 
@@ -11,6 +12,8 @@ public class DalMappingProfile : Profile
     {
         CreateMap<DriverDao, Driver>().ReverseMap();
         CreateMap<HitchhikerDao, Hitchhiker>().ReverseMap();
-        CreateMap<TripDao, Models.TripModel.Trip>().ReverseMap();
+        CreateMap<TripDao, Trip>().ReverseMap();
+        
+        // + UserDao, CredentialsDao, RoleDao
     }
 }
