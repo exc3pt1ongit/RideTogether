@@ -1,4 +1,5 @@
-﻿using RideTogether.Models.RouteModel;
+﻿using RideTogether.Models.PersonModel;
+using RideTogether.Models.RouteModel;
 
 namespace RideTogether.Models.TripModel;
 
@@ -9,5 +10,5 @@ public class Trip
     public double Price { get; set; }
     public DateTime Date { get; set; }
     public int PassengersCount { get; set; }
-    // public Driver Driver { get; set; }
+    public int DriverId { get; set; }
 }

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using RideTogether.Dal.DataObjects.Person;
 using RideTogether.Dal.DataObjects.Trip;
-using RideTogether.Models.Person;
 using RideTogether.Models.PersonModel;
 
 namespace RideTogether.Dal;

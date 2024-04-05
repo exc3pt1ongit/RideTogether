@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using RideTogether.Models.Person;
+using RideTogether.Models.PersonModel;
 using RideTogether.Orchestrators.Contracts.Driver;
 
 namespace RideTogether.Orchestrators.MappingProfiles;

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RideTogether.Dal.Filters;
 using RideTogether.Dal.Repositories.Interfaces;
-using RideTogether.Models.Person;
+using RideTogether.Models.PersonModel;
 using RideTogether.Orchestrators.Contracts.Driver;
 
 namespace RideTogether.Api.Controllers;

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using RideTogether.Dal.DataObjects.Person;
 using RideTogether.Dal.Filters;
 using RideTogether.Dal.Repositories.Interfaces;
-using RideTogether.Models.Person;
+using RideTogether.Models.PersonModel;
 
 namespace RideTogether.Dal.Repositories;
 
@@ -34,7 +34,7 @@ public class DriverRepository : IDriverRepository
 
         if (filter.MinTrips.HasValue)
         {
-            entities = entities.Where(e => e.Trips.Count >= filter.MinTrips.Value).ToList();
+            entities = entities.Where(e => e.Trips?.Count >= filter.MinTrips.Value).ToList();
         }
 
         return _mapper.Map<List<Driver>>(entities);
@@ -43,12 +43,15 @@ public class DriverRepository : IDriverRepository
     public async Task<List<Driver>> GetAllAsync()
     {
         var entities = await _dbContext.Drivers.AsNoTracking().ToListAsync();
+        entities.ForEach(e => e.Trips = _dbContext.Trips.Where(t => t.DriverId == e.Id).ToList());
         return _mapper.Map<List<Driver>>(entities);
     }
 
     public async Task<Driver> GetByIdAsync(int id)
     {
         var entity = await _dbContext.Drivers.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        if (entity != null)
+            entity.Trips = _dbContext.Trips.Where(t => t.DriverId == entity.Id).ToList();
         return _mapper.Map<Driver>(entity);
     }
 

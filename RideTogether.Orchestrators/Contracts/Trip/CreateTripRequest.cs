@@ -12,4 +12,7 @@ public class CreateTripRequest
     
     [Required(ErrorMessage = "Passengers count is required")]
     public int PassengersCount { get; set; }
+    
+    [Required(ErrorMessage = "DriverId is required")]
+    public int DriverId { get; set; }
 }

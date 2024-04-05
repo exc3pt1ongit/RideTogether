@@ -1,5 +1,5 @@
 ﻿using RideTogether.Dal.Filters;
-using RideTogether.Models.Person;
+using RideTogether.Models.PersonModel;
 
 namespace RideTogether.Dal.Repositories.Interfaces;
 

@@ -20,7 +20,5 @@ public class DriverDao
     [Column("screen_name")] public string ScreenName { get; set; }
     
     [Column("age")] public int Age { get; set; }
-    
-    [AllowNull]
-    [Column("trips")] public List<TripDao> Trips { get; set; }
+    [Column("trips")] public List<TripDao>? Trips { get; set; }
 }

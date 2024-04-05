@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+using RideTogether.Dal.DataObjects.Person;
 
 namespace RideTogether.Dal.DataObjects.Trip;
 
@@ -22,7 +24,6 @@ public class TripDao
     [Required]
     [Column("passengers_count")] public int PassengersCount { get; set; }
 
-    // [Column("driver_id")]
-    // [AllowNull]
-    // public DriverDao Driver { get; set; }
+    [Column("driver_id")]
+    public int DriverId { get; set; }
 }

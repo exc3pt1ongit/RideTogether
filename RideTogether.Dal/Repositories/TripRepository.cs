@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using RideTogether.Dal.DataObjects.Trip;
+using RideTogether.Models.TripModel;
 using RideTogether.Models.TripModel.Interfaces;
 
 namespace RideTogether.Dal.Repositories;
@@ -16,32 +17,32 @@ public class TripRepository : ITripRepository
         _mapper = mapper;
     }
     
-    public async Task<List<Models.TripModel.Trip>> GetAllAsync()
+    public async Task<List<Trip>> GetAllAsync()
     {
         var entities = await _dbContext.Trips.AsNoTracking().ToListAsync();
-        return _mapper.Map<List<Models.TripModel.Trip>>(entities);
+        return _mapper.Map<List<Trip>>(entities);
     }
 
-    public async Task<Models.TripModel.Trip> GetByIdAsync(int id)
+    public async Task<Trip> GetByIdAsync(int id)
     {
         var entity = await _dbContext.Trips.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
-        return _mapper.Map<Models.TripModel.Trip>(entity);
+        return _mapper.Map<Trip>(entity);
     }
 
-    public async Task<Models.TripModel.Trip> CreateAsync(Models.TripModel.Trip trip)
+    public async Task<Trip> CreateAsync(Trip trip)
     {
         var entity = _mapper.Map<TripDao>(trip);
         var result = await _dbContext.Trips.AddAsync(entity);
         await _dbContext.SaveChangesAsync();
-        return _mapper.Map<Models.TripModel.Trip>(result.Entity);
+        return _mapper.Map<Trip>(result.Entity);
     }
 
-    public async Task<Models.TripModel.Trip> UpdateAsync(Models.TripModel.Trip trip)
+    public async Task<Trip> UpdateAsync(Trip trip)
     {
         var existingEntity = _mapper.Map<TripDao>(trip);
         var entityEntry = _dbContext.Trips.Update(existingEntity);
         await _dbContext.SaveChangesAsync();
-        return _mapper.Map<Models.TripModel.Trip>(entityEntry.Entity);
+        return _mapper.Map<Trip>(entityEntry.Entity);
     }
 
     public async Task DeleteAsync(int id)

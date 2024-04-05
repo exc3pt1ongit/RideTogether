@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using RideTogether.Dal.Filters;
 using RideTogether.Dal.Repositories.Interfaces;
-using RideTogether.Models.Person;
+using RideTogether.Models.PersonModel;
 
 namespace RideTogether.Orchestrators.Person;
 
