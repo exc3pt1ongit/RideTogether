@@ -1,21 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RideTogether.Dal.DataObjects.Credentials;
-using RideTogether.Dal.DataObjects.Person;
-using RideTogether.Dal.DataObjects.Role;
-using RideTogether.Dal.DataObjects.Route;
-using RideTogether.Dal.DataObjects.Trip;
-using RideTogether.Dal.DataObjects.User;
+using RideTogether.Dal.Credentials;
+using RideTogether.Dal.Role;
+using RideTogether.Dal.User;
 
 namespace RideTogether.Dal;
 
 public class RideTogetherDbContext : DbContext
 {
     public RideTogetherDbContext(DbContextOptions<RideTogetherDbContext> options) : base(options) {}
+    
+    public DbSet<UserDao> Users { get; set; }
+    public DbSet<RoleDao> Roles { get; set; }
+    public DbSet<CredentialsDao> Credentials { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         #region FluentApi
             
+        base.OnModelCreating(modelBuilder);
+
         var user = modelBuilder.Entity<UserDao>();
         user.HasOne(u => u.Credentials)
             .WithOne(p => p.User)
@@ -40,13 +43,5 @@ public class RideTogetherDbContext : DbContext
             
         #endregion
     }
-
-    public DbSet<HitchhikerDao> Hitchhikers { get; set; }
-    public DbSet<DriverDao> Drivers { get; set; }
-    public DbSet<RouteDao> Routes { get; set; }
-    public DbSet<TripDao> Trips { get; set; }
     
-    public DbSet<UserDao> Users { get; set; }
-    public DbSet<RoleDao> Roles { get; set; }
-    public DbSet<CredentialsDao> Credentials { get; set; }
 }

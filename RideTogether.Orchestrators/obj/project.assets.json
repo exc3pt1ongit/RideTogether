@@ -370,24 +370,13 @@
         "dependencies": {
           "AutoMapper": "13.0.1",
           "Microsoft.EntityFrameworkCore": "8.0.3",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.2",
-          "RideTogether.Models": "1.0.0"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.2"
         },
         "compile": {
           "bin/placeholder/RideTogether.Dal.dll": {}
         },
         "runtime": {
           "bin/placeholder/RideTogether.Dal.dll": {}
-        }
-      },
-      "RideTogether.Models/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "compile": {
-          "bin/placeholder/RideTogether.Models.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/RideTogether.Models.dll": {}
         }
       }
     }
@@ -961,11 +950,6 @@
       "type": "project",
       "path": "../RideTogether.Dal/RideTogether.Dal.csproj",
       "msbuildProject": "../RideTogether.Dal/RideTogether.Dal.csproj"
-    },
-    "RideTogether.Models/1.0.0": {
-      "type": "project",
-      "path": "../RideTogether.Models/RideTogether.Models.csproj",
-      "msbuildProject": "../RideTogether.Models/RideTogether.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -973,7 +957,6 @@
       "AutoMapper >= 13.0.1",
       "Microsoft.IdentityModel.Tokens >= 7.5.0",
       "RideTogether.Dal >= 1.0.0",
-      "RideTogether.Models >= 1.0.0",
       "System.IdentityModel.Tokens.Jwt >= 7.5.0"
     ]
   },
@@ -1011,9 +994,6 @@
           "projectReferences": {
             "D:\\development\\coursework\\RideTogether\\RideTogether.Dal\\RideTogether.Dal.csproj": {
               "projectPath": "D:\\development\\coursework\\RideTogether\\RideTogether.Dal\\RideTogether.Dal.csproj"
-            },
-            "D:\\development\\coursework\\RideTogether\\RideTogether.Models\\RideTogether.Models.csproj": {
-              "projectPath": "D:\\development\\coursework\\RideTogether\\RideTogether.Models\\RideTogether.Models.csproj"
             }
           }
         }

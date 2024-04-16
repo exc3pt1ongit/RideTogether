@@ -2,9 +2,9 @@ using System.Security.Cryptography;
 using System.Text;
 using AutoMapper;
 using Microsoft.Extensions.Logging;
-using RideTogether.Dal.DataObjects.Role;
-using RideTogether.Models.CredentialsModel;
-using RideTogether.Models.UserModel;
+using RideTogether.Dal.Role;
+using RideTogether.Dal.User;
+using RideTogether.Orchestrators.User.Model;
 using RideTogether.Orchestrators.Validation.Exceptions;
 
 namespace RideTogether.Orchestrators.User;
@@ -22,46 +22,41 @@ public class UserOrchestrator : IUserOrchestrator
         _logger = logger;
     }
     
-    public async Task<Models.UserModel.User> RegisterAsync(SignUpModel authModel)
+    public async Task<Model.User> RegisterAsync(SignUpRequest request)
     {
-        var isExist = await _userRepository.IsEmailExistAsync(authModel.Email);
+        var isExist = await _userRepository.IsEmailExistAsync(request.Email);
 
         if (isExist)
-            throw new InvalidRegistrationException(string.Format(ExceptionMessages.EmailUsed, authModel.Email));
+            throw new InvalidRegistrationException(string.Format(ExceptionMessages.EmailUsed, request.Email));
 
-        if (authModel.Nickname == "")
-            authModel.Nickname = null;
+        if (request.Nickname == "") request.Nickname = null;
 
-        var isTaken = await _userRepository.IsNicknameTakenAsync(authModel.Nickname);
+        var isTaken = await _userRepository.IsNicknameTakenAsync(request.Nickname);
 
-        if (isTaken)
-            throw new Exception(string.Format(ExceptionMessages.NicknameTaken, authModel.Nickname));
+        if (isTaken) throw new Exception(string.Format(ExceptionMessages.NicknameTaken, request.Nickname));
 
-        var userModel = CreateAccount(authModel, (int)BasicRoles.Admin);
+        var userModel = CreateAccount(request, (int)BasicRoles.Admin);
 
-        var user = await _userRepository.CreateAsync(userModel);
+        var user = await _userRepository.CreateAsync(_mapper.Map<UserDao>(userModel));
 
-        _logger.LogInformation("User with email {Email} registered", authModel.Email);
+        _logger.LogInformation("User with email {Email} registered", request.Email);
 
-        return _mapper.Map<Models.UserModel.User>(user);
+        return _mapper.Map<Model.User>(user);
     }
 
-    public async Task<Models.UserModel.User> GetByIdAsync(int id)
+    public async Task<Model.User> GetByIdAsync(int id)
     {
         var user = await _userRepository.GetByIdAsync(id);
-
         if (user == null)
-            throw new NotFoundException(string.Format(ExceptionMessages.NotFound, nameof(User), "Id",
-                id.ToString()));
-
-        return _mapper.Map<Models.UserModel.User>(user);
+            throw new NotFoundException(string
+                .Format(ExceptionMessages.NotFound, nameof(Model.User), "Id", id.ToString()));
+        return _mapper.Map<Model.User>(user);
     }
 
-    public async Task<IEnumerable<Models.UserModel.User>> GetAllAsync()
+    public async Task<IEnumerable<Model.User>> GetAllAsync()
     {
         var users = await _userRepository.GetAllAsync();
-
-        return _mapper.Map<IEnumerable<Models.UserModel.User>>(users);
+        return _mapper.Map<IEnumerable<Model.User>>(users);
     }
 
     public async Task DeleteByIdAsync(int userId)
@@ -69,7 +64,7 @@ public class UserOrchestrator : IUserOrchestrator
         var user = await _userRepository.GetByIdAsync(userId);
 
         if (user == null)
-            throw new NotFoundException(string.Format(ExceptionMessages.NotFound, nameof(User), "Id",
+            throw new NotFoundException(string.Format(ExceptionMessages.NotFound, nameof(Model.User), "Id",
                 userId.ToString()));
 
         await _userRepository.DeleteAsync(userId);
@@ -77,21 +72,21 @@ public class UserOrchestrator : IUserOrchestrator
         _logger.LogInformation("The user {Email} has been deleted", user.Email);
     }
     
-    private static Models.UserModel.User CreateAccount(SignUpModel registrationModel, int roleId)
+    private static Model.User CreateAccount(SignUpRequest request, int roleId)
     {
         byte[] passwordHash;
         byte[] passwordSalt;
         using (var hmac = new HMACSHA512())
         {
             passwordSalt = hmac.Key;
-            passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registrationModel.Password));
+            passwordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password));
         }
 
-        var user = new Models.UserModel.User
+        var user = new Model.User
         {
-            Email = registrationModel.Email,
-            Nickname = registrationModel.Nickname,
-            Credentials = new Credentials
+            Email = request.Email,
+            Nickname = request.Nickname,
+            Credentials = new Credentials.Credentials
             {
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,

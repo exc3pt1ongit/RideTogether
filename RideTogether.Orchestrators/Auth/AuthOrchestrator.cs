@@ -1,15 +1,18 @@
-using System.IdentityModel.Tokens.Jwt;
+using AutoMapper;
+
+using System.Text;
 using System.Security.Claims;
 using System.Security.Cryptography;
-using System.Text;
-using AutoMapper;
+using System.IdentityModel.Tokens.Jwt;
+
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using RideTogether.Models.AuthModel;
-using RideTogether.Models.UserModel;
-using RideTogether.Orchestrators.Auth.Options;
+
+using RideTogether.Dal.User;
 using RideTogether.Orchestrators.User;
+using RideTogether.Orchestrators.Auth.Model;
+using RideTogether.Orchestrators.Auth.Options;
 using RideTogether.Orchestrators.Validation.Exceptions;
 
 namespace RideTogether.Orchestrators.Auth;
@@ -30,13 +33,14 @@ public class AuthOrchestrator : IAuthOrchestrator
         _logger = logger;
         _userRepository = userRepository;
     }
-    
+
     public async Task<AuthToken> GetTokenAsync(LoginRequest request)
     {
-        var user = await _userRepository.GetByEmailAsync(request.Email);
+        var userEntity = await _userRepository.GetByEmailAsync(request.Email);
+        var user = _mapper.Map<User.Model.User>(userEntity);
 
         if (user == null)
-            throw new NotFoundException(string.Format(ExceptionMessages.NotFound, nameof(User), "Email",
+            throw new NotFoundException(string.Format(ExceptionMessages.NotFound, nameof(User.Model.User), "Email",
                 request.Email));
 
         if (!VerifyPassword(request.Password, user.Credentials.PasswordHash, user.Credentials.PasswordSalt))
@@ -56,8 +60,8 @@ public class AuthOrchestrator : IAuthOrchestrator
         var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
         return computedHash.SequenceEqual(passwordHash);
     }
-    
-    private string GenerateToken(Models.UserModel.User user)
+
+    private string GenerateToken(User.Model.User user)
     {
         var authParams = _authOptions.Value;
 
@@ -70,7 +74,8 @@ public class AuthOrchestrator : IAuthOrchestrator
 
         // var key = authParams.GetSymmetricSecurityKey();
         // var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
-        var key = new SymmetricSecurityKey(authParams.GetSymmetricSecurityKey().Key.Take(64).ToArray()); // 512 bits = 64 bytes
+        var key = new SymmetricSecurityKey(authParams.GetSymmetricSecurityKey().Key.Take(64)
+            .ToArray()); // 512 bits = 64 bytes
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 
         var token = new JwtSecurityToken(

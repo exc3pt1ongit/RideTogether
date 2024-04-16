@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RideTogether.Orchestrators")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ca452c7cc8b82fbb594046c2dfa6593cf2581630")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fa647a1794999640f4d040380bd9dc08f7163d41")]
 [assembly: System.Reflection.AssemblyProductAttribute("RideTogether.Orchestrators")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RideTogether.Orchestrators")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

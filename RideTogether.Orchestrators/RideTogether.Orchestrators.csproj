@@ -8,7 +8,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\RideTogether.Dal\RideTogether.Dal.csproj" />
-      <ProjectReference Include="..\RideTogether.Models\RideTogether.Models.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -16,8 +16,6 @@ D:\development\coursework\RideTogetherAPI\RideTogether.Orchestrators\obj\Debug\n
 D:\development\coursework\RideTogether\RideTogether.Orchestrators\bin\Debug\net8.0\RideTogether.Orchestrators.deps.json
 D:\development\coursework\RideTogether\RideTogether.Orchestrators\bin\Debug\net8.0\RideTogether.Orchestrators.dll
 D:\development\coursework\RideTogether\RideTogether.Orchestrators\bin\Debug\net8.0\RideTogether.Orchestrators.pdb
-D:\development\coursework\RideTogether\RideTogether.Orchestrators\bin\Debug\net8.0\RideTogether.Models.dll
-D:\development\coursework\RideTogether\RideTogether.Orchestrators\bin\Debug\net8.0\RideTogether.Models.pdb
 D:\development\coursework\RideTogether\RideTogether.Orchestrators\obj\Debug\net8.0\RideTogether.Orchestrators.csproj.AssemblyReference.cache
 D:\development\coursework\RideTogether\RideTogether.Orchestrators\obj\Debug\net8.0\RideTogether.Orchestrators.GeneratedMSBuildEditorConfig.editorconfig
 D:\development\coursework\RideTogether\RideTogether.Orchestrators\obj\Debug\net8.0\RideTogether.Orchestrators.AssemblyInfoInputs.cache

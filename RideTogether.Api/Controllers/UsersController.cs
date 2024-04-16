@@ -1,8 +1,7 @@
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RideTogether.Models.UserModel;
-using RideTogether.Orchestrators.Contracts.User;
+using Microsoft.AspNetCore.Authorization;
+using RideTogether.Orchestrators.User;
+using RideTogether.Orchestrators.User.Model;
 
 namespace RideTogether.Api.Controllers;
 
@@ -11,12 +10,10 @@ namespace RideTogether.Api.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly IUserOrchestrator _userOrchestrator;
-    private readonly IMapper _mapper;
 
-    public UsersController(IUserOrchestrator userOrchestrator, IMapper mapper)
+    public UsersController(IUserOrchestrator userOrchestrator)
     {
         _userOrchestrator = userOrchestrator;
-        _mapper = mapper;
     }
     
     [HttpGet]
@@ -29,7 +26,7 @@ public class UsersController : ControllerBase
         return Ok(users);
     }
 
-    [HttpGet("{id:int}")]
+    [HttpGet("{id}")]
     // [Authorize(Roles = "admin")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
     // [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetails))]
@@ -46,13 +43,13 @@ public class UsersController : ControllerBase
     // [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ErrorDetails))]
     public async Task<ActionResult<User>> Register([FromBody] SignUpRequest request)
     {
-        var user = await _userOrchestrator.RegisterAsync(_mapper.Map<SignUpModel>(request));
+        var user = await _userOrchestrator.RegisterAsync(request);
 
         return CreatedAtAction(nameof(Register), new { id = user.Id }, user);
     }
 
-    [HttpDelete("{id:int}")]
-    [Authorize(Roles = "Admin")]
+    [HttpDelete("{id}")]
+    // [Authorize(Roles = "admin")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     // [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetails))]
     public async Task<ActionResult> DeleteUser(int id)

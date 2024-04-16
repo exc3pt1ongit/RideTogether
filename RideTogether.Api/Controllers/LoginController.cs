@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using RideTogether.Models.AuthModel;
+
+using RideTogether.Orchestrators.Auth;
+using RideTogether.Orchestrators.Auth.Model;
 
 namespace RideTogether.Api.Controllers;
 
@@ -21,7 +23,6 @@ public class LoginController : ControllerBase
     public async Task<IActionResult> Login(LoginRequest model)
     {
         var authToken = await _authOrchestrator.GetTokenAsync(model);
-
         return Ok(authToken.Token);
     }
 }

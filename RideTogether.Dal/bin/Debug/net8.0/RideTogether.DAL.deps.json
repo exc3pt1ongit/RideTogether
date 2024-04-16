@@ -12,8 +12,7 @@
           "Microsoft.EntityFrameworkCore": "8.0.3",
           "Microsoft.EntityFrameworkCore.Design": "8.0.3",
           "Microsoft.EntityFrameworkCore.Tools": "8.0.3",
-          "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.2",
-          "RideTogether.Models": "1.0.0"
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.2"
         },
         "runtime": {
           "RideTogether.Dal.dll": {}
@@ -568,12 +567,7 @@
           "System.Text.Encodings.Web": "8.0.0"
         }
       },
-      "System.Threading.Channels/6.0.0": {},
-      "RideTogether.Models/1.0.0": {
-        "runtime": {
-          "RideTogether.Models.dll": {}
-        }
-      }
+      "System.Threading.Channels/6.0.0": {}
     }
   },
   "libraries": {
@@ -875,11 +869,6 @@
       "sha512": "sha512-TY8/9+tI0mNaUMgntOxxaq2ndTkdXqLSxvPmas7XEqOlv9lQtB7wLjYGd756lOaO7Dvb5r/WXhluM+0Xe87v5Q==",
       "path": "system.threading.channels/6.0.0",
       "hashPath": "system.threading.channels.6.0.0.nupkg.sha512"
-    },
-    "RideTogether.Models/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

@@ -196,11 +196,9 @@ D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\tr\Micr
 D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\RideTogether.Dal.dll
-D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\RideTogether.Models.dll
 D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\RideTogether.Orchestrators.dll
 D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\RideTogether.Dal.pdb
 D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\RideTogether.Orchestrators.pdb
-D:\development\coursework\RideTogether\RideTogether.Api\bin\Debug\net8.0\RideTogether.Models.pdb
 D:\development\coursework\RideTogether\RideTogether.Api\obj\Debug\net8.0\RideTogether.Api.csproj.AssemblyReference.cache
 D:\development\coursework\RideTogether\RideTogether.Api\obj\Debug\net8.0\RideTogether.Api.GeneratedMSBuildEditorConfig.editorconfig
 D:\development\coursework\RideTogether\RideTogether.Api\obj\Debug\net8.0\RideTogether.Api.AssemblyInfoInputs.cache
