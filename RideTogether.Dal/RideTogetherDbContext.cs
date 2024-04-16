@@ -43,5 +43,4 @@ public class RideTogetherDbContext : DbContext
             
         #endregion
     }
-    
 }
