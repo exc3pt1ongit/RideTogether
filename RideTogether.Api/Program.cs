@@ -5,9 +5,11 @@ using RideTogether.Api.Configs;
 using RideTogether.Dal;
 using RideTogether.Dal.Credentials;
 using RideTogether.Dal.Role;
+using RideTogether.Dal.Trip;
 using RideTogether.Dal.User;
 using RideTogether.Orchestrators.Auth;
 using RideTogether.Orchestrators.Auth.Options;
+using RideTogether.Orchestrators.Trip;
 using RideTogether.Orchestrators.User;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -58,10 +60,12 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<ICredentialsRepository, CredentialsRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ITripRepository, TripRepository>();
 
 // Orchestrators
 builder.Services.AddScoped<IUserOrchestrator, UserOrchestrator>();
 builder.Services.AddScoped<IAuthOrchestrator, AuthOrchestrator>();
+builder.Services.AddScoped<ITripOrchestrator, TripOrchestrator>();
 
 // WebApi settings
 builder.Services.AddControllers();

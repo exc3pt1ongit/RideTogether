@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,6 +13,21 @@ namespace RideTogether.Dal.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Places",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Latitude = table.Column<double>(type: "double precision", nullable: false),
+                    Longitude = table.Column<double>(type: "double precision", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Places", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
@@ -39,6 +55,37 @@ namespace RideTogether.Dal.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Trips",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DriverId = table.Column<int>(type: "integer", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false),
+                    StartTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    SorcePlaceId = table.Column<int>(type: "integer", nullable: false),
+                    DestinationPlaceId = table.Column<int>(type: "integer", nullable: false),
+                    Travelers = table.Column<List<int>>(type: "integer[]", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Trips", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Trips_Places_DestinationPlaceId",
+                        column: x => x.DestinationPlaceId,
+                        principalTable: "Places",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Trips_Places_SorcePlaceId",
+                        column: x => x.SorcePlaceId,
+                        principalTable: "Places",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,6 +128,16 @@ namespace RideTogether.Dal.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Trips_DestinationPlaceId",
+                table: "Trips",
+                column: "DestinationPlaceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Trips_SorcePlaceId",
+                table: "Trips",
+                column: "SorcePlaceId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",
                 table: "Users",
                 column: "Email",
@@ -94,10 +151,16 @@ namespace RideTogether.Dal.Migrations
                 name: "Credentials");
 
             migrationBuilder.DropTable(
+                name: "Trips");
+
+            migrationBuilder.DropTable(
                 name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Places");
         }
     }
 }

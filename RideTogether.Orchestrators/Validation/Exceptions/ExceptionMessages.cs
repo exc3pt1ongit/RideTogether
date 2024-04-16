@@ -3,6 +3,8 @@ namespace RideTogether.Orchestrators.Validation.Exceptions;
 public static class ExceptionMessages
 {
     public static string EmailUsed = "The email {0} is already used.";
+
+    public static string TripAlreadyCreated = "The trip by {0} (from {1} to {2}) is already created.";
     
     public static string NicknameTaken = "The nickname {0} is already taken.";
     

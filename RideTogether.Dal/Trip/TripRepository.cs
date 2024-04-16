@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace RideTogether.Dal.Trip;
 
 public class TripRepository : ITripRepository
@@ -9,28 +11,50 @@ public class TripRepository : ITripRepository
         _dbContext = dbContext;
     }
     
-    public Task<List<TripDao>> GetAllAsync()
+    public async Task<List<TripDao>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _dbContext.Trips.AsNoTracking().ToListAsync();
     }
 
-    public Task<TripDao> GetByIdAsync(int id)
+    public async Task<TripDao> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _dbContext.Trips
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public Task<TripDao> CreateAsync(TripDao entity)
+    public async Task<TripDao> CreateAsync(TripDao entity)
     {
-        throw new NotImplementedException();
+        var result = await _dbContext.Trips.AddAsync(entity);
+        await _dbContext.SaveChangesAsync();
+        return result.Entity;
     }
 
-    public Task<TripDao> UpdateAsync(TripDao entity)
+    public async Task<TripDao> UpdateAsync(TripDao entity)
     {
-        throw new NotImplementedException();
+        var entityEntry = _dbContext.Trips.Update(entity);
+        await _dbContext.SaveChangesAsync();
+        return entityEntry.Entity;
     }
 
-    public Task DeleteAsync(int id)
+    public async Task DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        var existingEntity = await _dbContext.Trips
+            .FirstAsync(s => s.Id == id);
+        _dbContext.Trips.Remove(existingEntity);
+        await _dbContext.SaveChangesAsync();
+    }
+
+    public async Task<bool> IsTripExistAsync(int driverId, 
+        (double Lat, double Lng) source, (double Lat, double Lng) destination)
+    {
+        var existingTrip = await _dbContext.Trips
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.DriverId == driverId
+                && x.SorcePlace.Latitude == source.Lat
+                && x.SorcePlace.Longitude == source.Lng
+                && x.DestinationPlace.Latitude == destination.Lat
+                && x.DestinationPlace.Longitude == destination.Lng);
+        return existingTrip != null;
     }
 }

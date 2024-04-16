@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RideTogether.Dal.Credentials;
 using RideTogether.Dal.Role;
+using RideTogether.Dal.Trip;
 using RideTogether.Dal.User;
 
 namespace RideTogether.Dal;
@@ -12,6 +13,8 @@ public class RideTogetherDbContext : DbContext
     public DbSet<UserDao> Users { get; set; }
     public DbSet<RoleDao> Roles { get; set; }
     public DbSet<CredentialsDao> Credentials { get; set; }
+    public DbSet<PlaceDao> Places { get; set; }
+    public DbSet<TripDao> Trips { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
