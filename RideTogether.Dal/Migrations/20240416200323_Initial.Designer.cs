@@ -13,7 +13,7 @@ using RideTogether.Dal;
 namespace RideTogether.Dal.Migrations
 {
     [DbContext(typeof(RideTogetherDbContext))]
-    [Migration("20240416191157_Initial")]
+    [Migration("20240416200323_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -112,6 +112,9 @@ namespace RideTogether.Dal.Migrations
 
                     b.Property<int>("DestinationPlaceId")
                         .HasColumnType("integer");
+
+                    b.Property<double>("Distance")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("DriverId")
                         .HasColumnType("integer");

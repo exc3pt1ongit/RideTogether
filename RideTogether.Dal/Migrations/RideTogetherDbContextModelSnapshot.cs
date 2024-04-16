@@ -110,6 +110,9 @@ namespace RideTogether.Dal.Migrations
                     b.Property<int>("DestinationPlaceId")
                         .HasColumnType("integer");
 
+                    b.Property<double>("Distance")
+                        .HasColumnType("double precision");
+
                     b.Property<int>("DriverId")
                         .HasColumnType("integer");
 

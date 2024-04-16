@@ -5,6 +5,7 @@ public class TripDao : BaseDao
     public int DriverId { get; set; }
     public TripStatuses Status { get; set; }
     
+    public double Distance { get; set; }
     public DateTime StartTime { get; set; }
     public DateTime EndTime { get; set; }
     
