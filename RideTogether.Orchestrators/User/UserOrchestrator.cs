@@ -86,6 +86,8 @@ public class UserOrchestrator : IUserOrchestrator
         {
             Email = request.Email,
             Nickname = request.Nickname,
+            FirstName = request.FirstName,
+            LastName = request.LastName,
             Credentials = new Credentials.Credentials
             {
                 PasswordHash = passwordHash,

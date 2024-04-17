@@ -6,4 +6,6 @@ public class SignUpRequest
     public string Password { get; set; }
     public string PasswordRepeat { get; set; }
     public string Nickname { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
 }

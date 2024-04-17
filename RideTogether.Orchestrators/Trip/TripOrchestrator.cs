@@ -94,8 +94,8 @@ public class TripOrchestrator : ITripOrchestrator
                 Longitude = request.Destination.Longitude
             },
             Distance = approximateDistance,
-            StartTime = DateTime.Now,
-            EndTime = DateTime.Now + approximateTime,
+            StartTime = DateTime.Now.ToString("G"),
+            EndTime = (DateTime.Now + approximateTime).ToString("G"),
             Travelers = new List<int>()
         };
     }

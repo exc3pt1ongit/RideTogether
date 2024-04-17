@@ -30,6 +30,8 @@ public class RideTogetherDbContext : DbContext
         user.HasIndex(u => u.Email).IsUnique();
         user.Property(u => u.Email).HasMaxLength(100).IsRequired();
         user.Property(u => u.Nickname).HasMaxLength(30);
+        user.Property(u => u.FirstName).HasMaxLength(32);
+        user.Property(u => u.LastName).HasMaxLength(32);
         user.Property(u => u.RegistrationTime).HasDefaultValueSql("CURRENT_TIMESTAMP");
         user.ToTable("Users");
 

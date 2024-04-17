@@ -7,8 +7,8 @@ public class Trip
     public TripStatuses Status { get; set; }
     
     public double Distance { get; set; }
-    public DateTime StartTime { get; set; }
-    public DateTime EndTime { get; set; }
+    public string StartTime { get; set; }
+    public string EndTime { get; set; }
     
     public Place.Place SorcePlace { get; set; }
     public Place.Place DestinationPlace { get; set; }
