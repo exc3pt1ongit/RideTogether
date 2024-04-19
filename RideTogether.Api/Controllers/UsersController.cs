@@ -36,6 +36,16 @@ public class UsersController : ControllerBase
         var user = await _userOrchestrator.GetByIdAsync(id);
         return Ok(user);
     }
+    
+    [HttpGet("{nickname}")]
+    // [Authorize(Roles = "admin")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(User))]
+    // [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(ErrorDetails))]
+    public async Task<ActionResult<User>> GetByNickname(string nickname)
+    {
+        var user = await _userOrchestrator.GetByNicknameAsync(nickname);
+        return Ok(user);
+    }
 
     [HttpPost]
     [AllowAnonymous]
