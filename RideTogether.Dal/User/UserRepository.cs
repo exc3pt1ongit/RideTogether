@@ -28,15 +28,6 @@ public class UserRepository : IUserRepository
             .AsNoTracking()
             .FirstOrDefaultAsync(usr => usr.Id == id);
     }
-
-    public async Task<UserDao> GetByNicknameAsync(string nickname)
-    {
-        return await _dbContext.Users
-            .Include(usr => usr.Credentials)
-            .ThenInclude(cred => cred.Role)
-            .AsNoTracking()
-            .FirstOrDefaultAsync(usr => usr.Nickname.Equals(nickname));
-    }
     
     public async Task<UserDao> CreateAsync(UserDao entity)
     {

@@ -52,15 +52,6 @@ public class UserOrchestrator : IUserOrchestrator
                 .Format(ExceptionMessages.NotFound, nameof(Model.User), "Id", id.ToString()));
         return _mapper.Map<Model.User>(user);
     }
-    
-    public async Task<Model.User> GetByNicknameAsync(string nickname)
-    {
-        var user = await _userRepository.GetByNicknameAsync(nickname);
-        if (user == null)
-            throw new NotFoundException(string
-                .Format(ExceptionMessages.NotFound, nameof(Model.User), "Nickname", nickname));
-        return _mapper.Map<Model.User>(user);
-    }
 
     public async Task<IEnumerable<Model.User>> GetAllAsync()
     {

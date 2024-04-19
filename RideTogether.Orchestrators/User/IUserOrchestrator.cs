@@ -7,7 +7,6 @@ public interface IUserOrchestrator
     Task<Model.User> RegisterAsync(SignUpRequest request);
 
     Task<Model.User> GetByIdAsync(int id);
-    Task<Model.User> GetByNicknameAsync(string nickname);
 
     Task<IEnumerable<Model.User>> GetAllAsync();
 
