@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using RideTogether.Api.Configs;
+using RideTogether.Api.Filters;
 using RideTogether.Dal;
 using RideTogether.Dal.Credentials;
 using RideTogether.Dal.Role;
@@ -68,7 +69,10 @@ builder.Services.AddScoped<IAuthOrchestrator, AuthOrchestrator>();
 builder.Services.AddScoped<ITripOrchestrator, TripOrchestrator>();
 
 // WebApi settings
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<UserExceptionFilterAttribute>();
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
