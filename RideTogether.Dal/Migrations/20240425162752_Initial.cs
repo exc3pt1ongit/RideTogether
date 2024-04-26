@@ -49,6 +49,8 @@ namespace RideTogether.Dal.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Nickname = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    FirstName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false),
+                    LastName = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false),
                     Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     RegistrationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
                 },
@@ -65,25 +67,26 @@ namespace RideTogether.Dal.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DriverId = table.Column<int>(type: "integer", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
                     Distance = table.Column<double>(type: "double precision", nullable: false),
-                    StartTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    EndTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    SorcePlaceId = table.Column<int>(type: "integer", nullable: false),
-                    DestinationPlaceId = table.Column<int>(type: "integer", nullable: false),
+                    StartTime = table.Column<string>(type: "text", nullable: false),
+                    EndTime = table.Column<string>(type: "text", nullable: false),
+                    SourceId = table.Column<int>(type: "integer", nullable: false),
+                    DestinationId = table.Column<int>(type: "integer", nullable: false),
                     Travelers = table.Column<List<int>>(type: "integer[]", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Trips", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Trips_Places_DestinationPlaceId",
-                        column: x => x.DestinationPlaceId,
+                        name: "FK_Trips_Places_DestinationId",
+                        column: x => x.DestinationId,
                         principalTable: "Places",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Trips_Places_SorcePlaceId",
-                        column: x => x.SorcePlaceId,
+                        name: "FK_Trips_Places_SourceId",
+                        column: x => x.SourceId,
                         principalTable: "Places",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -129,14 +132,14 @@ namespace RideTogether.Dal.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Trips_DestinationPlaceId",
+                name: "IX_Trips_DestinationId",
                 table: "Trips",
-                column: "DestinationPlaceId");
+                column: "DestinationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Trips_SorcePlaceId",
+                name: "IX_Trips_SourceId",
                 table: "Trips",
-                column: "SorcePlaceId");
+                column: "SourceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",

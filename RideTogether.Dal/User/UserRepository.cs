@@ -33,7 +33,6 @@ public class UserRepository : IUserRepository
     {
         var result = await _dbContext.Users.AddAsync(entity);
         await _dbContext.SaveChangesAsync();
-
         return result.Entity;
     }
 

@@ -13,8 +13,8 @@ using RideTogether.Dal;
 namespace RideTogether.Dal.Migrations
 {
     [DbContext(typeof(RideTogetherDbContext))]
-    [Migration("20240416200959_ToStringFix")]
-    partial class ToStringFix
+    [Migration("20240425162752_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,7 +110,7 @@ namespace RideTogether.Dal.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DestinationPlaceId")
+                    b.Property<int>("DestinationId")
                         .HasColumnType("integer");
 
                     b.Property<double>("Distance")
@@ -123,7 +123,10 @@ namespace RideTogether.Dal.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("SorcePlaceId")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("SourceId")
                         .HasColumnType("integer");
 
                     b.Property<string>("StartTime")
@@ -139,9 +142,9 @@ namespace RideTogether.Dal.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DestinationPlaceId");
+                    b.HasIndex("DestinationId");
 
-                    b.HasIndex("SorcePlaceId");
+                    b.HasIndex("SourceId");
 
                     b.ToTable("Trips");
                 });
@@ -158,6 +161,16 @@ namespace RideTogether.Dal.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<string>("Nickname")
                         .IsRequired()
@@ -197,21 +210,21 @@ namespace RideTogether.Dal.Migrations
 
             modelBuilder.Entity("RideTogether.Dal.Trip.TripDao", b =>
                 {
-                    b.HasOne("RideTogether.Dal.Trip.PlaceDao", "DestinationPlace")
+                    b.HasOne("RideTogether.Dal.Trip.PlaceDao", "Destination")
                         .WithMany()
-                        .HasForeignKey("DestinationPlaceId")
+                        .HasForeignKey("DestinationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RideTogether.Dal.Trip.PlaceDao", "SorcePlace")
+                    b.HasOne("RideTogether.Dal.Trip.PlaceDao", "Source")
                         .WithMany()
-                        .HasForeignKey("SorcePlaceId")
+                        .HasForeignKey("SourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DestinationPlace");
+                    b.Navigation("Destination");
 
-                    b.Navigation("SorcePlace");
+                    b.Navigation("Source");
                 });
 
             modelBuilder.Entity("RideTogether.Dal.Role.RoleDao", b =>

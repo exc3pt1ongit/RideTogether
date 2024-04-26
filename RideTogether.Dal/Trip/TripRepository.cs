@@ -13,13 +13,17 @@ public class TripRepository : ITripRepository
     
     public async Task<List<TripDao>> GetAllAsync()
     {
-        return await _dbContext.Trips.AsNoTracking().ToListAsync();
+        return await _dbContext.Trips
+            .Include(x => x.Source)
+            .Include(x => x.Destination)
+            .ToListAsync();
     }
 
     public async Task<TripDao> GetByIdAsync(int id)
     {
         return await _dbContext.Trips
-            .AsNoTracking()
+            .Include(x => x.Source)
+            .Include(x => x.Destination)
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 
@@ -51,10 +55,10 @@ public class TripRepository : ITripRepository
         var existingTrip = await _dbContext.Trips
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.DriverId == driverId
-                && x.SorcePlace.Latitude == source.Lat
-                && x.SorcePlace.Longitude == source.Lng
-                && x.DestinationPlace.Latitude == destination.Lat
-                && x.DestinationPlace.Longitude == destination.Lng);
+                && x.Source.Latitude == source.Lat
+                && x.Source.Longitude == source.Lng
+                && x.Destination.Latitude == destination.Lat
+                && x.Destination.Longitude == destination.Lng);
         return existingTrip != null;
     }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RideTogether.Dal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c23002b5c9b394c802bab807b0251c0449bb35de")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ee7269e68be79f44a9667bf657a76eb89c9937e2")]
 [assembly: System.Reflection.AssemblyProductAttribute("RideTogether.Dal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RideTogether.Dal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

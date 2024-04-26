@@ -10,7 +10,5 @@ public class UserDao : BaseDao
     public string Email { get; set; }
 
     public DateTime RegistrationTime { get; set; } = DateTime.Now;
-
-    // public int CredentialsId { get; set; }
     public CredentialsDao Credentials { get; set; }
 }

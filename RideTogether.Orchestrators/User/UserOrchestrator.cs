@@ -21,7 +21,18 @@ public class UserOrchestrator : IUserOrchestrator
         _mapper = mapper;
         _logger = logger;
     }
-    
+
+    public async Task<Model.User> UpdateAsync(int id, UpdateRequest request)
+    {
+        var user = await GetByIdAsync(id);
+        if (user == null)
+            throw new NotFoundException(string
+                .Format(ExceptionMessages.NotFound, nameof(Model.User), "Id", user?.Id));
+        user = _mapper.Map(request, user);
+        var updated = await _userRepository.UpdateAsync(_mapper.Map<UserDao>(user));
+        return _mapper.Map<Model.User>(updated);
+    }
+
     public async Task<Model.User> RegisterAsync(SignUpRequest request)
     {
         var isExist = await _userRepository.IsEmailExistAsync(request.Email);
@@ -35,7 +46,7 @@ public class UserOrchestrator : IUserOrchestrator
 
         if (isTaken) throw new Exception(string.Format(ExceptionMessages.NicknameTaken, request.Nickname));
 
-        var userModel = CreateAccount(request, (int)BasicRoles.Admin);
+        var userModel = CreateAccount(request, (int)BasicRoles.User);
 
         var user = await _userRepository.CreateAsync(_mapper.Map<UserDao>(userModel));
 

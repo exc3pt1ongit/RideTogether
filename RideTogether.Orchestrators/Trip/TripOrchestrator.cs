@@ -81,13 +81,14 @@ public class TripOrchestrator : ITripOrchestrator
         {
             DriverId = request.DriverId,
             Status = TripStatuses.Available,
-            SorcePlace = new Place.Place
+            Price = request.Price,
+            Source = new Place.Place
             {
                 Name = request.Source.Name,
                 Latitude = request.Source.Latitude,
                 Longitude = request.Source.Longitude
             },
-            DestinationPlace = new Place.Place
+            Destination = new Place.Place
             {
                 Name = request.Destination.Name,
                 Latitude = request.Destination.Latitude,
@@ -96,7 +97,7 @@ public class TripOrchestrator : ITripOrchestrator
             Distance = approximateDistance,
             StartTime = DateTime.Now.ToString("G"),
             EndTime = (DateTime.Now + approximateTime).ToString("G"),
-            Travelers = new List<int>()
+            Travelers = []
         };
     }
 
@@ -118,7 +119,7 @@ public class TripOrchestrator : ITripOrchestrator
 
         var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
         
-        return EarthRadiusKm * c;
+        return (EarthRadiusKm * c) * 1.1;
     }
     private static double ToRadians(double angle) => Math.PI * angle / 180.0;
     
