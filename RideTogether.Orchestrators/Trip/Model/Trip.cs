@@ -8,11 +8,11 @@ public class Trip
     
     public decimal Price { get; set; }
     public double Distance { get; set; }
-    public string StartTime { get; set; }
-    public string EndTime { get; set; }
+    public DateTime StartTime { get; set; }
+    public DateTime EndTime { get; set; }
     
     public Place.Place Source { get; set; }
     public Place.Place Destination { get; set; }
 
-    public List<int> Travelers { get; set; }
+    // public List<int> Travelers { get; set; }
 }

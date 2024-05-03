@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RideTogether.Dal.Credentials;
+using RideTogether.Dal.DbContextConfigurations;
 using RideTogether.Dal.Role;
 using RideTogether.Dal.Trip;
 using RideTogether.Dal.User;
@@ -45,7 +46,9 @@ public class RideTogetherDbContext : DbContext
 
         modelBuilder.Entity<RoleDao>()
             .Property(r => r.RoleName).HasMaxLength(50).IsRequired();
-            
+
+        modelBuilder.ApplyConfiguration(new TripDaoConfiguration());
+
         #endregion
     }
 }

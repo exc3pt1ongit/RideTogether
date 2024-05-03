@@ -71,7 +71,7 @@ builder.Services.AddScoped<ITripOrchestrator, TripOrchestrator>();
 // WebApi settings
 builder.Services.AddControllers(options =>
 {
-    options.Filters.Add<UserExceptionFilterAttribute>();
+    // options.Filters.Add<UserExceptionFilterAttribute>();
 });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

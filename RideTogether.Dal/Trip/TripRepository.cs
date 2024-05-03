@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using RideTogether.Dal.Trip.Filtering;
 
 namespace RideTogether.Dal.Trip;
 
@@ -19,12 +20,79 @@ public class TripRepository : ITripRepository
             .ToListAsync();
     }
 
-    public async Task<TripDao> GetByIdAsync(int id)
+    public async Task<List<TripDao>> GetFilteredAsync(TripFilter filter)
     {
-        return await _dbContext.Trips
+        var query = _dbContext.Trips
             .Include(x => x.Source)
             .Include(x => x.Destination)
-            .FirstOrDefaultAsync(x => x.Id == id);
+            .Include(x => x.Amenities)
+            .AsQueryable();
+
+        if (!string.IsNullOrEmpty(filter.MainFilter))
+        {
+            var isFormated = Enum.TryParse<TripMainFilterTypes>(filter.MainFilter, out var mainFilterType);
+
+            if (isFormated)
+            {
+                query = mainFilterType switch
+                {
+                    TripMainFilterTypes.EarliestDepartureTime => query.OrderBy(x => x.StartTime),
+                    TripMainFilterTypes.LowestPrice => query.OrderBy(x => x.Price),
+                    TripMainFilterTypes.ShortestTrip => query.OrderBy(x => x.Distance),
+                    _ => query
+                };
+            }
+        }
+        
+        // if (filter.DepartureSixToNoon.HasValue || filter.DepartureNoonToSix.HasValue || filter.DepartureAfterSixPm.HasValue)
+        // {
+        //     query = query.Where(x =>
+        //         (filter.DepartureSixToNoon.HasValue && x.StartTime.TimeOfDay >= new TimeSpan(6, 0, 0) && x.StartTime.TimeOfDay <= new TimeSpan(12, 0, 0)) ||
+        //         (filter.DepartureNoonToSix.HasValue && x.StartTime.TimeOfDay > new TimeSpan(12, 0, 0) && x.StartTime.TimeOfDay <= new TimeSpan(18, 0, 0)) ||
+        //         (filter.DepartureAfterSixPm.HasValue && x.StartTime.TimeOfDay > new TimeSpan(18, 0, 0))
+        //     );
+        // }
+        
+        if (filter.DepartureSixToNoon.HasValue || filter.DepartureNoonToSix.HasValue || filter.DepartureAfterSixPm.HasValue)
+        {
+            query = query.Where(x =>
+                (filter.DepartureSixToNoon.HasValue && x.StartTime.TimeOfDay >= new TimeSpan(6, 0, 0) && x.StartTime.TimeOfDay < new TimeSpan(12, 0, 0)) ||
+                (filter.DepartureNoonToSix.HasValue && x.StartTime.TimeOfDay >= new TimeSpan(12, 0, 0) && x.StartTime.TimeOfDay < new TimeSpan(18, 0, 0)) ||
+                (filter.DepartureAfterSixPm.HasValue && x.StartTime.TimeOfDay >= new TimeSpan(18, 0, 0))
+            );
+        }
+        
+        if (filter.Amenities is { MaximumTwoPeopleBackSeat: not null })
+            query = query.Where(x => x.Amenities.MaximumTwoPeopleBackSeat == filter.Amenities.MaximumTwoPeopleBackSeat);
+
+        if (filter.Amenities is { CanSmoke: not null })
+            query = query.Where(x => x.Amenities.CanSmoke == filter.Amenities.CanSmoke);
+
+        if (filter.Amenities is { PetsAllowed: not null })
+            query = query.Where(x => x.Amenities.PetsAllowed == filter.Amenities.PetsAllowed);
+
+        if (filter.Amenities is { Wifi: not null })
+            query = query.Where(x => x.Amenities.Wifi == filter.Amenities.Wifi);
+
+        if (filter.Amenities is { AirConditioning: not null })
+            query = query.Where(x => x.Amenities.AirConditioning == filter.Amenities.AirConditioning);
+
+        return query
+            .Skip((filter.PageNumber - 1) * filter.PageSize)
+            .Take(filter.PageSize)
+            .AsNoTracking()
+            .ToList();
+    }
+    
+    public async Task<TripDao> GetByIdAsync(int id)
+    {
+        var query = _dbContext.Trips
+            .Include(x => x.Source)
+            .Include(x => x.Destination)
+            .AsQueryable()
+            .AsNoTracking();
+
+        return await query.FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task<TripDao> CreateAsync(TripDao entity)
@@ -52,13 +120,14 @@ public class TripRepository : ITripRepository
     public async Task<bool> IsTripExistAsync(int driverId, 
         (double Lat, double Lng) source, (double Lat, double Lng) destination)
     {
+        const double tolerance = 1e-6;
         var existingTrip = await _dbContext.Trips
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.DriverId == driverId
-                && x.Source.Latitude == source.Lat
-                && x.Source.Longitude == source.Lng
-                && x.Destination.Latitude == destination.Lat
-                && x.Destination.Longitude == destination.Lng);
+                && Math.Abs(x.Source.Latitude - source.Lat) < tolerance
+                && Math.Abs(x.Source.Longitude - source.Lng) < tolerance
+                && Math.Abs(x.Destination.Latitude - destination.Lat) < tolerance
+                && Math.Abs(x.Destination.Longitude - destination.Lng) < tolerance);
         return existingTrip != null;
     }
 }

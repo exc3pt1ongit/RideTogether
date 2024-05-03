@@ -1,4 +1,4 @@
-namespace RideTogether.Orchestrators.Trip.Model;
+namespace RideTogether.Orchestrators.Trip.Model.Requests;
 
 public class CreateTripRequest
 {
@@ -6,4 +6,5 @@ public class CreateTripRequest
     public Place.Place Source { get; set; }
     public Place.Place Destination { get; set; }
     public decimal Price { get; set; }
+    public TripAmenities Amenities { get; set; }
 }

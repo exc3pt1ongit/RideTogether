@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -69,11 +68,15 @@ namespace RideTogether.Dal.Migrations
                     Status = table.Column<int>(type: "integer", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     Distance = table.Column<double>(type: "double precision", nullable: false),
-                    StartTime = table.Column<string>(type: "text", nullable: false),
-                    EndTime = table.Column<string>(type: "text", nullable: false),
+                    StartTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     SourceId = table.Column<int>(type: "integer", nullable: false),
                     DestinationId = table.Column<int>(type: "integer", nullable: false),
-                    Travelers = table.Column<List<int>>(type: "integer[]", nullable: false)
+                    MaximumTwoPeopleBackSeat = table.Column<bool>(type: "boolean", nullable: true),
+                    CanSmoke = table.Column<bool>(type: "boolean", nullable: true),
+                    PetsAllowed = table.Column<bool>(type: "boolean", nullable: true),
+                    Wifi = table.Column<bool>(type: "boolean", nullable: true),
+                    AirConditioning = table.Column<bool>(type: "boolean", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -83,13 +86,13 @@ namespace RideTogether.Dal.Migrations
                         column: x => x.DestinationId,
                         principalTable: "Places",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Trips_Places_SourceId",
                         column: x => x.SourceId,
                         principalTable: "Places",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
