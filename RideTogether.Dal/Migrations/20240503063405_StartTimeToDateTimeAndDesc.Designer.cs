@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RideTogether.Dal;
@@ -11,9 +12,11 @@ using RideTogether.Dal;
 namespace RideTogether.Dal.Migrations
 {
     [DbContext(typeof(RideTogetherDbContext))]
-    partial class RideTogetherDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240503063405_StartTimeToDateTimeAndDesc")]
+    partial class StartTimeToDateTimeAndDesc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

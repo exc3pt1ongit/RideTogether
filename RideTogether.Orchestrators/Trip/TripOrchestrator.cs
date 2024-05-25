@@ -115,8 +115,9 @@ public class TripOrchestrator : ITripOrchestrator
                 Longitude = request.Destination.Longitude
             },
             Distance = approximateDistance,
-            StartTime = DateTime.Now.ToUniversalTime(),
-            EndTime = DateTime.Now.ToUniversalTime() + approximateTime,
+            // StartTime = DateTime.Now.ToUniversalTime(),
+            StartTime = request.StartTime,
+            EndTime = request.StartTime + approximateTime,
             Amenities = new TripAmenities
             {
                 MaximumTwoPeopleBackSeat = request.Amenities.MaximumTwoPeopleBackSeat,
@@ -124,7 +125,8 @@ public class TripOrchestrator : ITripOrchestrator
                 PetsAllowed  = request.Amenities.PetsAllowed,
                 Wifi = request.Amenities.Wifi,
                 AirConditioning = request.Amenities.AirConditioning,
-            }
+            },
+            Description = request.Description
             // now its 400, because of amenities. set false manually!!!
             // also we need to add start date time to get from FRONT
             // Travelers = []

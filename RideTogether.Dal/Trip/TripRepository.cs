@@ -1,3 +1,4 @@
+using System.Numerics;
 using Microsoft.EntityFrameworkCore;
 using RideTogether.Dal.Trip.Filtering;
 
@@ -17,6 +18,7 @@ public class TripRepository : ITripRepository
         return await _dbContext.Trips
             .Include(x => x.Source)
             .Include(x => x.Destination)
+            .Include(x => x.Amenities)
             .ToListAsync();
     }
 
@@ -27,7 +29,39 @@ public class TripRepository : ITripRepository
             .Include(x => x.Destination)
             .Include(x => x.Amenities)
             .AsQueryable();
+        
+        if (filter.SourceLat != 0 && filter.SourceLng != 0)
+        {
+            // Assuming 1 degree of latitude/longitude is approximately 111 kilometers
+            var radiusInKm = 0.5; // Adjust this radius as needed
+            var sourceLatitude = filter.SourceLat;
+            var sourceLongitude = filter.SourceLng;
 
+            query = query.Where(x => 
+                (x.Source.Latitude - sourceLatitude) * (x.Source.Latitude - sourceLatitude) +
+                (x.Source.Longitude - sourceLongitude) * (x.Source.Longitude - sourceLongitude) <= radiusInKm * radiusInKm);
+        }
+
+        if (filter.DestinationLat != 0 && filter.DestinationLng != 0)
+        {
+            // Similar to source latitude/longitude filter
+            var radiusInKm = 0.5; // Adjust this radius as needed
+            var destinationLatitude = filter.DestinationLat;
+            var destinationLongitude = filter.DestinationLng;
+
+            query = query.Where(x => 
+                (x.Destination.Latitude - destinationLatitude) * (x.Destination.Latitude - destinationLatitude) +
+                (x.Destination.Longitude - destinationLongitude) * (x.Destination.Longitude - destinationLongitude) <= radiusInKm * radiusInKm);
+        }
+        
+        if (filter.TripDate != default)
+        {
+            query = query.Where(x => x.StartTime.Date == filter.TripDate.Date);
+        }
+
+        if (filter.CreatedBy is > 0)
+            query = query.Where(x => x.DriverId == filter.CreatedBy);
+        
         if (!string.IsNullOrEmpty(filter.MainFilter))
         {
             var isFormated = Enum.TryParse<TripMainFilterTypes>(filter.MainFilter, out var mainFilterType);
@@ -53,14 +87,14 @@ public class TripRepository : ITripRepository
         //     );
         // }
         
-        if (filter.DepartureSixToNoon.HasValue || filter.DepartureNoonToSix.HasValue || filter.DepartureAfterSixPm.HasValue)
-        {
-            query = query.Where(x =>
-                (filter.DepartureSixToNoon.HasValue && x.StartTime.TimeOfDay >= new TimeSpan(6, 0, 0) && x.StartTime.TimeOfDay < new TimeSpan(12, 0, 0)) ||
-                (filter.DepartureNoonToSix.HasValue && x.StartTime.TimeOfDay >= new TimeSpan(12, 0, 0) && x.StartTime.TimeOfDay < new TimeSpan(18, 0, 0)) ||
-                (filter.DepartureAfterSixPm.HasValue && x.StartTime.TimeOfDay >= new TimeSpan(18, 0, 0))
-            );
-        }
+        // if (filter.DepartureSixToNoon.HasValue || filter.DepartureNoonToSix.HasValue || filter.DepartureAfterSixPm.HasValue)
+        // {
+        //     query = query.Where(x =>
+        //         (filter.DepartureSixToNoon.HasValue && x.StartTime.TimeOfDay >= new TimeSpan(6, 0, 0) && x.StartTime.TimeOfDay < new TimeSpan(12, 0, 0)) ||
+        //         (filter.DepartureNoonToSix.HasValue && x.StartTime.TimeOfDay >= new TimeSpan(12, 0, 0) && x.StartTime.TimeOfDay < new TimeSpan(18, 0, 0)) ||
+        //         (filter.DepartureAfterSixPm.HasValue && x.StartTime.TimeOfDay >= new TimeSpan(18, 0, 0))
+        //     );
+        // }
         
         if (filter.Amenities is { MaximumTwoPeopleBackSeat: not null })
             query = query.Where(x => x.Amenities.MaximumTwoPeopleBackSeat == filter.Amenities.MaximumTwoPeopleBackSeat);
@@ -89,6 +123,7 @@ public class TripRepository : ITripRepository
         var query = _dbContext.Trips
             .Include(x => x.Source)
             .Include(x => x.Destination)
+            .Include(x => x.Amenities)
             .AsQueryable()
             .AsNoTracking();
 

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RideTogether.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4cbaab0ee402fe098d7bede75987fffb106a4dc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+36362dc02c6840ee94453d5edc55eade301e9449")]
 [assembly: System.Reflection.AssemblyProductAttribute("RideTogether.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RideTogether.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

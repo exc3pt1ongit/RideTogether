@@ -12,7 +12,9 @@ public class TripDao : BaseDao
     
     public PlaceDao Source { get; set; }
     public PlaceDao Destination { get; set; }
+    public TripAmenities Amenities { get; set; }
+    
+    public string Description { get; set; }
 
     // public List<int> Travelers { get; set; }
-    public TripAmenities Amenities { get; set; }
 }

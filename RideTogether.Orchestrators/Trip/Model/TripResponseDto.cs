@@ -13,7 +13,9 @@ public class TripResponseDto
     
     public Place.Place Source { get; set; }
     public Place.Place Destination { get; set; }
+    public TripAmenities Amenities { get; set; }
+    
+    public string Description { get; set; }
 
     // public List<int> Travelers { get; set; }
-    public TripAmenities Amenities { get; set; }
 }
